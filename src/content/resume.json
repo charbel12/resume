@@ -16,9 +16,9 @@
   ],
   "stats": [
     { "label": "Years building software", "value": 4, "suffix": "+" },
-    { "label": "Edge CPU after rewrite", "value": 1, "suffix": "%" },
     { "label": "Realtime protocols", "value": 4, "suffix": "" },
-    { "label": "Languages spoken", "value": 3, "suffix": "" }
+    { "label": "Years in Frontend Development", "value": 4, "suffix": "" },
+    { "label": "Years in Backend Development", "value": 3, "suffix": "" }
   ],
   "skills": {
     "frontend": ["React", "TypeScript", "Tailwind CSS"],
