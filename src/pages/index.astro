@@ -22,10 +22,10 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
   <a id="top" class="sr-only">Top</a>
   <div class="relative">
     <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-20 grain"></div>
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div class="absolute left-1/2 top-[-120px] h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-cyan-400/10 blur-3xl"></div>
-      <div class="absolute left-[10%] top-[380px] h-[260px] w-[520px] rounded-full bg-fuchsia-400/10 blur-3xl"></div>
-      <div class="absolute right-[5%] bottom-[-100px] h-[400px] w-[700px] rounded-full bg-cyan-400/10 blur-3xl"></div>
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden ambient-layer">
+      <div class="ambient-orb ambient-orb-cyan absolute left-1/2 top-[-120px] h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-cyan-400/10 blur-3xl"></div>
+      <div class="ambient-orb ambient-orb-fuchsia absolute left-[10%] top-[380px] h-[260px] w-[520px] rounded-full bg-fuchsia-400/10 blur-3xl"></div>
+      <div class="ambient-orb ambient-orb-cyan absolute right-[5%] bottom-[-100px] h-[400px] w-[700px] rounded-full bg-cyan-400/10 blur-3xl"></div>
     </div>
 
     <header class="pt-10 sm:pt-14">
@@ -86,9 +86,9 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
               <div class="rounded-xl border border-white/10 bg-black/20 p-4">
                 <p class="text-xs uppercase tracking-[0.2em] muted">Stack</p>
                 <p class="mt-1 text-sm">
-                  <span class="kbd">WebSocket</span>
-                  <span class="kbd ml-2">React</span>
-                  <span class="kbd ml-2">Node.js</span>
+                  <span class="kbd">Frontend</span>
+                  <span class="kbd ml-2">Backend</span>
+                  <span class="kbd ml-2">CI/CD</span>
                 </p>
               </div>
             </div>
@@ -148,7 +148,7 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
           <div class="relative grid gap-4 pl-4 sm:pl-8 before:absolute before:inset-y-0 before:left-[7px] sm:before:left-[15px] before:w-px before:bg-white/10">
             {experience.map((role) => (
               <div class="relative">
-                <div class="absolute left-[-29px] sm:left-[-37px] top-8 h-3 w-3 rounded-full border-2 border-cyan-400 bg-black shadow-[0_0_8px_rgba(34,211,238,0.6)]"></div>
+                <div class="timeline-dot absolute left-[-29px] sm:left-[-37px] top-8 h-3 w-3 rounded-full border-2 border-cyan-400 bg-black shadow-[0_0_8px_rgba(34,211,238,0.6)]"></div>
                 <article class="spotlight-card rounded-2xl border border-white/10 bg-black/20 p-5 sm:p-6 transition-colors hover:border-white/20 hover:bg-black/30">
                   <header class="tilt-inner flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <div>
@@ -212,7 +212,7 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
                   <div class="flex items-center gap-2">
                     <h3 class="text-lg font-semibold tracking-tight">{p.title}</h3>
                     {p.featured ? (
-                      <span class="rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-200">Featured</span>
+                      <span class="badge-accent rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-200">Featured</span>
                     ) : null}
                   </div>
                   <p class="mt-1 muted">
@@ -289,10 +289,10 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
 
       <Section id="skills" title="Skills" eyebrow="Tooling">
         <div class="grid gap-5">
-          <div class="marquee-container overflow-hidden rounded-2xl border border-white/10 bg-black/20 py-4 w-full relative before:absolute before:inset-y-0 before:left-0 before:w-16 before:bg-gradient-to-r before:from-black/50 before:to-transparent before:z-10 after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-l after:from-black/50 after:to-transparent after:z-10">
+          <div class="marquee-container overflow-hidden rounded-2xl border border-white/10 bg-black/20 py-4 w-full relative">
             <div class="animate-marquee flex w-max gap-4 px-4">
               {[...Object.values(skills).flat(), ...Object.values(skills).flat()].map(skill => (
-                <span class="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-50 whitespace-nowrap">{skill}</span>
+                <span class="skill-pill-marquee">{skill}</span>
               ))}
             </div>
           </div>
@@ -361,7 +361,7 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
               <div class="flex items-start justify-between gap-3">
                 <h3 class="text-base font-semibold tracking-tight">{c.title}</h3>
                 {c.status ? (
-                  <span class="shrink-0 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-200">{c.status}</span>
+                  <span class="badge-accent shrink-0 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-200">{c.status}</span>
                 ) : null}
               </div>
               <p class="mt-1 muted">{c.issuer}</p>
@@ -456,57 +456,25 @@ const resumePdf = `${base.replace(/\/$/, "")}/resume.pdf`;
   </script>
 
   <script is:inline>
-    // Spotlight & 3D Tilt Effect
+    // Spotlight glow only (no 3D tilt — avoids cursor/hit-target issues)
     (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const cards = document.querySelectorAll(".spotlight-card");
       cards.forEach((card) => {
         card.addEventListener("mousemove", (e) => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          // Spotlight position
-          card.style.setProperty("--mouse-x", `${x}px`);
-          card.style.setProperty("--mouse-y", `${y}px`);
-
-          // 3D Tilt calculation
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg tilt
-          const rotateY = ((x - centerX) / centerX) * 5;
-
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
         });
-
         card.addEventListener("mouseleave", () => {
-          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+          card.style.removeProperty("--mouse-x");
+          card.style.removeProperty("--mouse-y");
         });
       });
     })();
   </script>
 
   <script is:inline>
-    // Magnetic Buttons
-    (function () {
-      const magnetics = document.querySelectorAll('.magnetic-btn');
-      
-      magnetics.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-          const rect = btn.getBoundingClientRect();
-          const h = rect.width / 2;
-          const w = rect.height / 2;
-          const x = e.clientX - rect.left - h;
-          const y = e.clientY - rect.top - w;
-          
-          btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = 'translate(0px, 0px)';
-        });
-      });
-    })();
-
     // Clipboard Copy
     (function () {
       const copyBtns = document.querySelectorAll('.copy-btn');

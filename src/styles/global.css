@@ -8,6 +8,8 @@
   --muted: 220 12% 65%;
   --text: 0 0% 98%;
   --border: 220 14% 18%;
+  --surface: 222 18% 12%;
+  --surface-hover: 222 18% 16%;
   --accent: 191 95% 58%;
 }
 
@@ -118,11 +120,68 @@ body {
   animation-play-state: paused;
 }
 
+.marquee-container::before,
+.marquee-container::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: 4rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, hsl(var(--bg)), transparent);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, hsl(var(--bg)), transparent);
+}
+
+.skill-pill-marquee {
+  @apply rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap;
+  border-color: hsl(var(--border));
+  background: hsl(var(--surface));
+  color: hsl(var(--text));
+}
+
+html:not(.light) .skill-pill-marquee {
+  border-color: rgba(34, 211, 238, 0.2);
+  background: rgba(34, 211, 238, 0.1);
+  color: rgb(207 250 254);
+}
+
+/* Ambient background orbs */
+.ambient-orb {
+  pointer-events: none;
+}
+
+html.light .ambient-orb {
+  display: none;
+}
+
+html.light .badge-accent {
+  border-color: hsl(199 89% 48% / 0.25) !important;
+  background: hsl(199 89% 48% / 0.08) !important;
+  color: hsl(199 89% 32%) !important;
+}
+
+html.light .timeline-dot {
+  border-color: hsl(199 89% 48%) !important;
+  background: hsl(var(--card)) !important;
+  box-shadow: 0 0 0 3px hsl(199 89% 48% / 0.15) !important;
+}
+
 /* Spotlight & Tilt Effects */
+.tilt-inner {
+  transform: none;
+}
+
 .spotlight-card {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.1s ease, border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .spotlight-card::before {
@@ -148,8 +207,17 @@ body {
   opacity: 1;
 }
 
-.tilt-inner {
-  transform: translateZ(20px);
+html.light #cmdk-input {
+  border-color: hsl(var(--border));
+  color: hsl(var(--text));
+}
+
+html.light .cmdk-item[aria-selected="true"] {
+  background: hsl(199 89% 48% / 0.1);
+}
+
+html.light button.text-cyan-200 {
+  color: hsl(199 89% 32%) !important;
 }
 
 /* Tooltips */
@@ -289,24 +357,38 @@ body {
 
 /* Light theme */
 html.light {
-  --bg: 210 40% 97%;
+  --bg: 0 0% 99%;
   --card: 0 0% 100%;
-  --muted: 220 12% 40%;
-  --text: 222 30% 12%;
-  --border: 220 16% 85%;
-  --accent: 191 90% 38%;
+  --muted: 220 9% 46%;
+  --text: 224 71% 4%;
+  --border: 220 13% 91%;
+  --surface: 220 14% 96%;
+  --surface-hover: 220 14% 93%;
+  --accent: 199 89% 48%;
   color-scheme: light;
 }
 
 html.light .grain {
-  mix-blend-mode: multiply;
-  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  opacity: 0.04;
+}
+
+html.light .card-elevated {
+  box-shadow:
+    0 0 0 1px hsl(var(--border)),
+    0 20px 50px -30px rgba(15, 23, 42, 0.08);
+}
+
+html.light .shine::before {
+  background:
+    radial-gradient(650px 200px at 15% 10%, rgba(148, 163, 184, 0.12), transparent 55%),
+    radial-gradient(520px 260px at 85% 0%, rgba(203, 213, 225, 0.14), transparent 52%);
 }
 
 html.light .bg-black\/20,
 html.light .bg-black\/30,
 html.light .bg-black\/40 {
-  background-color: hsl(210 30% 96%) !important;
+  background-color: hsl(var(--surface)) !important;
 }
 
 html.light .border-white\/10,
@@ -315,8 +397,15 @@ html.light .border-white\/20 {
 }
 
 html.light .bg-white\/5,
-html.light .bg-white\/10 {
-  background-color: hsl(210 25% 93%) !important;
+html.light .bg-white\/10,
+html.light .hover\:bg-white\/5:hover,
+html.light .hover\:bg-white\/10:hover,
+html.light .hover\:bg-white\/20:hover {
+  background-color: hsl(var(--surface-hover)) !important;
+}
+
+html.light .hover\:bg-black\/30:hover {
+  background-color: hsl(var(--surface-hover)) !important;
 }
 
 html.light .text-white\/90 {
@@ -324,19 +413,79 @@ html.light .text-white\/90 {
 }
 
 html.light .text-white\/20 {
-  color: hsl(220 15% 75%) !important;
+  color: hsl(220 9% 75%) !important;
 }
 
 html.light .hero-title {
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  color: hsl(var(--text));
-  -webkit-text-fill-color: hsl(var(--text));
+  background: linear-gradient(180deg, hsl(var(--text)) 0%, hsl(220 9% 35%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 html.light .kbd {
-  background: hsl(210 25% 93%);
+  background: hsl(var(--surface));
+  border-color: hsl(var(--border));
+  color: hsl(var(--text));
+}
+
+html.light .btn-primary {
+  border-color: hsl(199 89% 48% / 0.25);
+  background: hsl(199 89% 48% / 0.1);
+  color: hsl(199 89% 32%);
+}
+
+html.light .btn-primary:hover {
+  background: hsl(199 89% 48% / 0.16);
+}
+
+html.light .btn-ghost {
+  border-color: hsl(var(--border));
+  background: hsl(var(--surface));
+  color: hsl(var(--text));
+}
+
+html.light .btn-ghost:hover {
+  background: hsl(var(--surface-hover));
+}
+
+html.light .nav-link.active {
+  background: hsl(199 89% 48% / 0.1);
+  color: hsl(var(--text));
+}
+
+html.light .marquee-container::before {
+  background: linear-gradient(to right, hsl(var(--bg)), transparent);
+}
+
+html.light .marquee-container::after {
+  background: linear-gradient(to left, hsl(var(--bg)), transparent);
+}
+
+html.light #cmdk-overlay {
+  background: rgba(15, 23, 42, 0.25);
+}
+
+html.light #scroll-progress {
+  background: linear-gradient(90deg, hsl(199 89% 48%), hsl(262 52% 55%));
+  box-shadow: none;
+}
+
+html.light .spotlight-card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(15, 23, 42, 0.06),
+    transparent 40%
+  );
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: hsl(220 13% 85%);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: hsl(220 9% 70%);
 }
 
 /* Reduced motion: disable decorative motion */
