@@ -1,0 +1,16 @@
+---
+const { id, title, eyebrow } = Astro.props;
+---
+
+<section id={id} class="py-12 sm:py-16">
+  <div class="container-page">
+    <header class="mb-6 sm:mb-8">
+      {eyebrow ? <p class="mb-2 text-xs font-medium tracking-[0.2em] uppercase muted">{eyebrow}</p> : null}
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">{title}</h2>
+    </header>
+    <div class="reveal" data-reveal>
+      <slot />
+    </div>
+  </div>
+</section>
+

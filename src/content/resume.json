@@ -1,0 +1,159 @@
+{
+  "basics": {
+    "name": "Charbel Haber",
+    "label": "Software Engineer",
+    "location": "Mrouj - Maten",
+    "phone": "+961 71 04 76 45",
+    "email": "charbel.el.haber@gmail.com"
+  },
+  "summary": [
+    "Full-stack software engineer focused on real-time systems and reliable backend services.",
+    "Hands-on with embedded/cloud integrations, WebSockets, deployments, and data-driven features."
+  ],
+  "skills": {
+    "frontend": ["React", "TypeScript", "Tailwind CSS"],
+    "backend": ["Node.js", "Python", "FastAPI", "Laravel", "Django"],
+    "realtime": ["WebSocket", "MQTT"],
+    "data": ["PostgreSQL", "Redis", "SQL"],
+    "devops": ["Docker", "GitHub Actions"]
+  },
+  "legacySkills": ["Bootstrap", "JavaScript", "Sequelize", "MySQL"],
+  "languages": [
+    { "name": "English", "level": "Fluent" },
+    { "name": "French", "level": "Fluent" },
+    { "name": "Arabic", "level": "Fluent" }
+  ],
+  "experience": [
+    {
+      "company": "Beytek SAL Offshore",
+      "location": "Jal El Dib",
+      "title": "Full Stack Software Engineer",
+      "type": "Full-time",
+      "start": "2022-12",
+      "end": null,
+      "tags": ["Realtime", "Embedded", "Web", "DevOps", "ML"],
+      "highlights": [
+        "Designed and implemented real-time WebSocket servers/clients for cloud-to-device communication and reliable data synchronization across hardware integrations (Raspberry Pi, Micrologix, Protonode).",
+        "Integrated elevator control systems: hall calls, car operations, state tracking, and CAN communication protocols.",
+        "Developed and maintained backend systems (Node.js, Laravel, Django, Sequelize, MySQL) with database migrations, REST APIs, and real-time processing.",
+        "Built responsive technician and monitoring interfaces, revamping projects with React for modern frontend workflows.",
+        "Implemented fault and alarm management with synchronization, timestamps, and edge-case handling.",
+        "Applied dispatch algorithms for elevator routing: floor assignments, hall call tracking, and state updates across multiple cars.",
+        "Automated server/container deployments with Docker and docker-compose in cloud and embedded environments.",
+        "Explored ML/predictive analytics: object detection (YOLOv5, SSD, Faster R-CNN) and time-series power consumption forecasting."
+      ]
+    },
+    {
+      "company": "Lebanese Alternative Learning (LAL NGO)",
+      "location": "Beirut",
+      "title": "IT Specialist",
+      "type": "Full-time",
+      "start": "2022-01",
+      "end": "2022-11",
+      "tags": ["Web", "DevOps", "Embedded"],
+      "highlights": [
+        "Managed Moodle server deployments on Raspberry Pi devices to host the Lebanese curriculum efficiently.",
+        "Maintained and updated Moodle courses for smooth access and performance.",
+        "Administered WordPress site: new posts, content updates, and landing-page improvements.",
+        "Troubleshot Moodle/WordPress issues to ensure continuous availability.",
+        "Collaborated with educators to integrate curriculum resources into Moodle for effective online learning."
+      ]
+    },
+    {
+      "company": "Beytek SAL Offshore",
+      "location": "Jal El Dib",
+      "title": "Developer Intern",
+      "type": "Internship",
+      "start": "2021-10",
+      "end": "2021-12",
+      "tags": ["Web", "Backend"],
+      "highlights": [
+        "Built frontend pages based on REST API calls using HTML/CSS/JavaScript.",
+        "Coordinated with a senior developer to deliver features and fixes.",
+        "Got hands-on exposure to Node.js, Django, and Laravel."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Cloud Elevator Telemetry Pipeline",
+      "subtitle": "Beytek SAL Offshore",
+      "timeframe": "2023 - Present",
+      "description": "Rebuilt the monitoring project from a monolithic Laravel app to a modern React + TypeScript frontend, powered by a real-time cloud telemetry pipeline.",
+      "tags": ["React", "FastAPI", "WebSockets", "MQTT"],
+      "techStack": ["React", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "Mosquitto", "MQTT", "WebSocket"],
+      "highlights": [
+        "Migrated the frontend to React + TypeScript and rebuilt monitoring UI components around real-time data streams.",
+        "Implemented cloud telemetry transfer from hardware to the server using MQTT, and live backend-to-frontend updates using WebSockets."
+      ],
+      "metrics": [
+        { "label": "Telemetry", "value": "MQTT + WebSockets" }
+      ]
+    },
+    {
+      "title": "Edge Telemetry Optimization (CAN to WebSocket)",
+      "subtitle": "Beytek SAL Offshore",
+      "timeframe": "2023",
+      "description": "Revamped the edge logic for reading and transmitting hardware packets, drastically reducing system overhead on edge devices.",
+      "tags": ["Embedded", "Raspberry Pi", "Optimization"],
+      "techStack": ["Python", "OOP", "CAN Protocol", "WebSocket", "Raspberry Pi"],
+      "highlights": [
+        "Revamped the logic for reading and sending packets from CAN to WebSocket using Object-Oriented Programming (OOP).",
+        "Optimized processing by parsing only changed data instead of parsing and applying logic to every packet."
+      ],
+      "metrics": [
+        { "label": "CPU Usage", "value": "30% -> ~1%" }
+      ]
+    },
+    {
+      "title": "Cable Damage Detection",
+      "subtitle": "Machine Learning Integration",
+      "timeframe": "2023",
+      "description": "Automated the inspection of elevator shaft cables using computer vision and object detection models.",
+      "tags": ["ML", "Computer Vision", "Python"],
+      "techStack": ["Python", "YOLOv5", "OpenCV"],
+      "highlights": [
+        "Built image detection/specification pipeline for identifying damaged elevator shaft cables.",
+        "Trained and evaluated YOLO-based models for high-accuracy object detection in low-light shaft environments."
+      ],
+      "metrics": []
+    },
+    {
+      "title": "Moodle on Edge Devices",
+      "subtitle": "Lebanese Alternative Learning",
+      "timeframe": "2022",
+      "description": "Managed lightweight Moodle server deployments on Raspberry Pi devices to host and distribute the Lebanese curriculum in low-resource environments.",
+      "tags": ["DevOps", "Linux", "Web"],
+      "techStack": ["Moodle", "Raspberry Pi", "Linux", "WordPress"],
+      "highlights": [
+        "Deployed educational platforms on low-powered edge hardware to operate effectively in offline or low-bandwidth areas.",
+        "Maintained and troubleshot system issues ensuring continuous availability for students."
+      ],
+      "metrics": []
+    }
+  ],
+  "education": [
+    {
+      "degree": "Computer Science Bachelor",
+      "school": "AKU - Al Kafaat University",
+      "location": "Beirut",
+      "start": "2018-09",
+      "end": "2022-06"
+    },
+    {
+      "degree": "Physical Education Bachelor",
+      "school": "Lebanese University - Faculty of Pedagogy",
+      "location": "Beirut",
+      "start": "2017-09",
+      "end": "2022-05"
+    }
+  ],
+  "ongoingLearning": [
+    {
+      "title": "AI & Prompt Engineering - AUB AI-Assisted Coding - SU25-26",
+      "status": "Currently taking"
+    }
+  ],
+  "hobbies": ["Reading", "Gym", "Gaming"]
+}
+

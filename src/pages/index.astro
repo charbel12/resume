@@ -1,0 +1,470 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import resume from "../content/resume.json";
+
+const { basics, summary, skills, legacySkills, languages, experience, projects, education, ongoingLearning } = resume;
+
+const fmtMonth = (ym) => {
+  if (!ym) return "Present";
+  const [y, m] = ym.split("-").map(Number);
+  const d = new Date(y, (m || 1) - 1, 1);
+  return d.toLocaleString("en-US", { month: "short", year: "numeric" });
+};
+
+const mailTo = `mailto:${basics.email}`;
+const telTo = `tel:${basics.phone.replace(/\s/g, "")}`;
+---
+
+<BaseLayout title={`${basics.name} — ${basics.label}`}>
+  <a id="top" class="sr-only">Top</a>
+  <div class="relative">
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-20 grain"></div>
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute left-1/2 top-[-120px] h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-cyan-400/10 blur-3xl"></div>
+      <div class="absolute left-[10%] top-[380px] h-[260px] w-[520px] rounded-full bg-fuchsia-400/10 blur-3xl"></div>
+      <div class="absolute right-[5%] bottom-[-100px] h-[400px] w-[700px] rounded-full bg-cyan-400/10 blur-3xl"></div>
+    </div>
+
+    <header class="pt-10 sm:pt-14">
+      <div class="container-page">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <p class="text-xs font-medium tracking-[0.2em] uppercase muted">Resume</p>
+            <h1 class="text-4xl sm:text-6xl font-semibold tracking-tight">
+              <span class="bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">{basics.name}</span>
+            </h1>
+            <p class="text-lg sm:text-xl muted">{basics.label} · {basics.location}</p>
+          </div>
+
+          <div class="card card-elevated shine p-5 sm:p-7">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div class="max-w-2xl">
+                <p class="text-base sm:text-lg leading-relaxed">
+                  <span class="font-medium">Focused on real-time systems</span> and reliable backend services, with hands-on embedded/cloud integrations.
+                </p>
+                <p class="mt-2 muted leading-relaxed">{summary.join(" ")}</p>
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                <button class="btn btn-primary magnetic-btn copy-btn" data-copy={basics.email}>
+                  Email
+                </button>
+                <button class="btn btn-ghost magnetic-btn copy-btn" data-copy={basics.phone}>
+                  Call
+                </button>
+                <a class="btn btn-ghost" href="#experience">
+                  Experience
+                </a>
+                <a class="btn btn-ghost" href="#projects">
+                  Projects
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div class="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] muted">Email</p>
+                <p class="mt-1 font-mono text-sm">{basics.email}</p>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] muted">Phone</p>
+                <p class="mt-1 font-mono text-sm">{basics.phone}</p>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] muted">Stack</p>
+                <p class="mt-1 text-sm">
+                  <span class="kbd">WebSocket</span>
+                  <span class="kbd ml-2">React</span>
+                  <span class="kbd ml-2">Node.js</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <nav class="sticky top-4 z-10 -mx-2 flex flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-black/40 p-2 backdrop-blur-md">
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#experience">Experience</a>
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#projects">Projects</a>
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#skills">Skills</a>
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#education">Education</a>
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#learning">Learning</a>
+            <a class="focus-ring ml-auto rounded-xl bg-white/10 px-3 py-2 text-sm font-medium hover:bg-white/20 transition-colors magnetic-btn" href="/resume.pdf" download>Download Resume</a>
+            <a class="focus-ring rounded-xl px-3 py-2 text-sm muted hover:bg-white/5" href="#top">Top</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="pb-20">
+      <Section id="experience" title="Experience" eyebrow="Proof of work">
+        <div class="flex flex-col gap-4">
+          <div class="rounded-xl border border-white/10 bg-black/20 p-4 sm:p-5">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+              <p class="text-sm muted">
+                Tip: filter bullets by focus. <span class="kbd">Realtime</span> <span class="kbd ml-1">Embedded</span> <span class="kbd ml-1">Web</span> <span class="kbd ml-1">ML</span>
+              </p>
+              <div class="flex flex-wrap gap-2" id="focusToggle">
+                {["All", "Realtime", "Embedded", "Web", "DevOps", "ML"].map((t) => (
+                  <button
+                    type="button"
+                    class="focus-ring rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium hover:bg-white/10"
+                    data-focus={t}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="relative grid gap-4 pl-4 sm:pl-8 before:absolute before:inset-y-0 before:left-[7px] sm:before:left-[15px] before:w-px before:bg-white/10">
+            {experience.map((role) => (
+              <div class="relative">
+                <div class="absolute left-[-29px] sm:left-[-37px] top-8 h-3 w-3 rounded-full border-2 border-cyan-400 bg-black shadow-[0_0_8px_rgba(34,211,238,0.6)]"></div>
+                <article class="spotlight-card rounded-2xl border border-white/10 bg-black/20 p-5 sm:p-6 transition-colors hover:border-white/20 hover:bg-black/30">
+                  <header class="tilt-inner flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 class="text-lg font-semibold tracking-tight">{role.title}</h3>
+                      <p class="mt-1 muted">
+                        <span class="font-medium text-white/90">{role.company}</span>
+                        <span class="mx-2 text-white/20">·</span>
+                        <span>{role.location}</span>
+                        <span class="mx-2 text-white/20">·</span>
+                        <span>{role.type}</span>
+                      </p>
+                    </div>
+                    <p class="text-sm muted font-mono">
+                      {fmtMonth(role.start)} — {fmtMonth(role.end)}
+                    </p>
+                  </header>
+
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {role.tags.map((tag) => (
+                      <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium muted">{tag}</span>
+                    ))}
+                  </div>
+
+                  <details class="mt-4 group">
+                    <summary class="cursor-pointer list-none select-none focus-ring rounded-xl px-3 py-2 -mx-3 hover:bg-white/5 flex items-center justify-between">
+                      <span class="text-sm font-medium">Highlights</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-open:rotate-180 muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <ul class="mt-3 grid gap-2 pl-5">
+                      {role.highlights.map((h) => (
+                        <li class="text-sm leading-relaxed" data-tags={role.tags.join(",")}>
+                          <span class="muted">•</span> <span class="ml-2">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section id="projects" title="Projects" eyebrow="Systems you built">
+        <div class="grid gap-4 lg:grid-cols-2">
+          {projects?.map((p) => (
+            <article class="spotlight-card rounded-2xl border border-white/10 bg-black/20 p-5 sm:p-6 transition-colors hover:border-white/20 hover:bg-black/30">
+              <header class="tilt-inner flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 class="text-lg font-semibold tracking-tight">{p.title}</h3>
+                  <p class="mt-1 muted">
+                    <span class="font-medium text-white/90">{p.subtitle}</span>
+                  </p>
+                  <p class="mt-2 text-sm font-mono muted">{p.timeframe}</p>
+                </div>
+              </header>
+
+              <p class="mt-4 text-sm leading-relaxed muted">{p.description}</p>
+
+              <div class="mt-4 flex flex-wrap gap-2">
+                {p.tags.map((tag) => (
+                  <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium muted">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <details class="mt-4 group">
+                <summary class="cursor-pointer list-none select-none focus-ring rounded-xl px-3 py-2 -mx-3 hover:bg-white/5 flex items-center justify-between">
+                  <span class="text-sm font-medium">What I built</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-open:rotate-180 muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ul class="mt-3 grid gap-2 pl-5">
+                  {p.highlights.map((h) => (
+                    <li class="text-sm leading-relaxed">
+                      <span class="muted">•</span> <span class="ml-2">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+
+              {p.metrics?.length ? (
+                <div class="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <p class="text-xs font-medium tracking-[0.2em] uppercase muted">Impact</p>
+                  <div class="mt-3 grid gap-2 sm:grid-cols-2">
+                    {p.metrics.map((m) => (
+                      <div class="rounded-xl border border-white/10 bg-white/5 p-3">
+                        <p class="text-xs muted">{m.label}</p>
+                        <p class="mt-1 text-sm font-mono">{m.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              <div class="mt-4">
+                <p class="text-xs font-medium tracking-[0.2em] uppercase muted">Tech stack</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {p.techStack.map((t) => (
+                    <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="skills" title="Skills" eyebrow="Tooling">
+        <div class="grid gap-5">
+          <div class="marquee-container overflow-hidden rounded-2xl border border-white/10 bg-black/20 py-4 w-full relative before:absolute before:inset-y-0 before:left-0 before:w-16 before:bg-gradient-to-r before:from-black/50 before:to-transparent before:z-10 after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-l after:from-black/50 after:to-transparent after:z-10">
+            <div class="animate-marquee flex w-max gap-4 px-4">
+              {[...Object.values(skills).flat(), ...Object.values(skills).flat()].map(skill => (
+                <span class="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-50 whitespace-nowrap">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {Object.entries(skills).map(([group, items]) => (
+              <div class="rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30">
+                <p class="text-xs font-medium tracking-[0.2em] uppercase muted">{group}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {items.map((s) => (
+                    <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium">{s}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30">
+            <p class="text-xs font-medium tracking-[0.2em] uppercase muted">Also worked with</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {legacySkills.map((s) => (
+                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium muted">{s}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30">
+            <p class="text-xs font-medium tracking-[0.2em] uppercase muted">Languages</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {languages.map((l) => (
+                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium">
+                  {l.name} <span class="muted">· {l.level}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="education" title="Education" eyebrow="Foundations">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {education.map((e) => (
+            <div class="rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30">
+              <h3 class="text-base font-semibold tracking-tight">{e.degree}</h3>
+              <p class="mt-1 muted">{e.school} · {e.location}</p>
+              <p class="mt-3 text-sm font-mono muted">{fmtMonth(e.start)} — {fmtMonth(e.end)}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="learning" title="Ongoing learning" eyebrow="Now">
+        <div class="grid gap-4">
+          {ongoingLearning.map((c) => (
+            <div class="rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30">
+              <h3 class="text-base font-semibold tracking-tight">{c.title}</h3>
+              <p class="mt-1 muted">{c.status}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="writing" title="Writing" eyebrow="Blog">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {/* Placeholder Blog Cards */}
+          <a href="#" class="group rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30 block">
+            <h3 class="text-base font-semibold tracking-tight group-hover:text-cyan-400 transition-colors">Building Real-Time Pipelines with MQTT</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">A deep dive into how I reduced edge device CPU usage from 30% to 1% by replacing REST polling with an MQTT message broker.</p>
+            <p class="mt-3 text-xs font-mono muted">Coming soon</p>
+          </a>
+          <a href="#" class="group rounded-2xl border border-white/10 bg-black/20 p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-black/30 block">
+            <h3 class="text-base font-semibold tracking-tight group-hover:text-cyan-400 transition-colors">YOLO for Industrial Inspections</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Exploring the challenges of deploying object detection models in low-light environments for automated safety checks.</p>
+            <p class="mt-3 text-xs font-mono muted">Coming soon</p>
+          </a>
+        </div>
+      </Section>
+
+      <footer class="pt-2 pb-10">
+        <div class="container-page">
+          <div class="card p-5 sm:p-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm muted">
+              Built with Astro + Tailwind. Hosted on GitHub Pages.
+            </p>
+            <div class="flex flex-wrap gap-2 text-sm">
+              <a class="focus-ring rounded-lg px-3 py-2 hover:bg-white/5" href={mailTo}>Email</a>
+              <a class="focus-ring rounded-lg px-3 py-2 hover:bg-white/5" href={telTo}>Call</a>
+              <a class="focus-ring rounded-lg px-3 py-2 hover:bg-white/5" href="#top">Back to top</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const root = document.getElementById("focusToggle");
+      if (!root) return;
+
+      const buttons = Array.from(root.querySelectorAll("button[data-focus]"));
+      const allBullets = Array.from(document.querySelectorAll("[data-tags]"));
+
+      function setActive(focus) {
+        buttons.forEach((b) => {
+          const on = b.getAttribute("data-focus") === focus;
+          b.classList.toggle("bg-cyan-400/15", on);
+          b.classList.toggle("text-cyan-200", on);
+          b.classList.toggle("border-cyan-300/20", on);
+          b.classList.toggle("bg-white/5", !on);
+        });
+
+        allBullets.forEach((el) => {
+          const tags = (el.getAttribute("data-tags") || "").split(",").map((t) => t.trim());
+          const show = focus === "All" ? true : tags.includes(focus);
+          el.style.display = show ? "" : "none";
+          
+          if (show && focus !== "All") {
+            const details = el.closest("details");
+            if (details) details.open = true;
+          }
+        });
+      }
+
+      buttons.forEach((b) => {
+        b.addEventListener("click", () => setActive(b.getAttribute("data-focus") || "All"));
+      });
+
+      setActive("All");
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
+      if (!nodes.length) return;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          // Group entries that intersect at the same time for staggered delay
+          let delay = 0;
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              const children = e.target.querySelectorAll(".transition-all, .rounded-2xl");
+              if (children.length > 1) {
+                children.forEach((child, i) => {
+                  child.style.transitionDelay = `${i * 100}ms`;
+                  child.classList.add("in-view");
+                });
+              }
+              e.target.classList.add("in-view");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12 }
+      );
+
+      nodes.forEach((n) => io.observe(n));
+    })();
+  </script>
+
+  <script is:inline>
+    // Spotlight & 3D Tilt Effect
+    (function () {
+      const cards = document.querySelectorAll(".spotlight-card");
+      cards.forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Spotlight position
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+
+          // 3D Tilt calculation
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg tilt
+          const rotateY = ((x - centerX) / centerX) * 5;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+    })();
+  </script>
+
+  <script is:inline>
+    // Magnetic Buttons
+    (function () {
+      const magnetics = document.querySelectorAll('.magnetic-btn');
+      
+      magnetics.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const h = rect.width / 2;
+          const w = rect.height / 2;
+          const x = e.clientX - rect.left - h;
+          const y = e.clientY - rect.top - w;
+          
+          btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0px, 0px)';
+        });
+      });
+    })();
+
+    // Clipboard Copy
+    (function () {
+      const copyBtns = document.querySelectorAll('.copy-btn');
+      copyBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-copy');
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.classList.add('copied');
+            setTimeout(() => btn.classList.remove('copied'), 2000);
+          } catch (err) {
+            console.error('Failed to copy', err);
+          }
+        });
+      });
+    })();
+  </script>
+</BaseLayout>
+

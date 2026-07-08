@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 222 22% 7%;
+  --card: 222 18% 10%;
+  --muted: 220 12% 65%;
+  --text: 0 0% 98%;
+  --border: 220 14% 18%;
+  --accent: 191 95% 58%;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[hsl(var(--bg))] text-[hsl(var(--text))] font-sans antialiased;
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='210' height='210'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='210' height='210' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  background-size: 210px 210px;
+  mix-blend-mode: overlay;
+  opacity: 0.18;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+}
+
+.card {
+  @apply rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] shadow-sm;
+}
+
+.card-elevated {
+  @apply shadow-glow;
+}
+
+.muted {
+  @apply text-[hsl(var(--muted))];
+}
+
+.kbd {
+  @apply rounded-md border border-[hsl(var(--border))] bg-black/30 px-2 py-1 font-mono text-xs;
+}
+
+.btn {
+  @apply focus-ring inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold;
+}
+
+.btn-primary {
+  @apply border border-cyan-300/20 bg-cyan-400/15 text-cyan-200 hover:bg-cyan-400/20;
+}
+
+.btn-ghost {
+  @apply border border-white/10 bg-white/5 hover:bg-white/10;
+}
+
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--accent))] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(var(--bg))];
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(650px 200px at 15% 10%, rgba(34, 211, 238, 0.18), transparent 55%),
+    radial-gradient(520px 260px at 85% 0%, rgba(232, 121, 249, 0.14), transparent 52%);
+  pointer-events: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.in-view {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Spotlight & Tilt Effects */
+.spotlight-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(255, 255, 255, 0.15),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.tilt-inner {
+  transform: translateZ(20px);
+}
+
+/* Tooltips */
+.copy-btn {
+  position: relative;
+}
+
+.copy-btn::after {
+  content: "Copied!";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--text));
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+}
+
+.copy-btn.copied::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--bg));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.6);
+}
