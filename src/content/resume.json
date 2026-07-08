@@ -187,8 +187,14 @@
     {
       "title": "AI-Assisted Coding & Prompt Engineering",
       "issuer": "American University of Beirut (AUB)",
-      "date": "2025 - 2026",
+      "date": "2026 - 2026",
       "status": "In progress"
+    },
+    {
+      "title": "Introduction to AI and LLMs",
+      "issuer": "Zaka - AI Academy",
+      "date": "2025 - 2025",
+      "status": "Completed"
     }
   ],
   "hobbies": ["Reading", "Gym", "Gaming"]
