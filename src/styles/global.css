@@ -197,3 +197,197 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(34, 211, 238, 0.6);
 }
+
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 100;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(232, 121, 249, 0.9));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+  transition: width 0.1s linear;
+}
+
+/* Active nav link (scroll-spy) */
+.nav-link.active {
+  color: hsl(var(--text));
+  background: rgba(34, 211, 238, 0.12);
+}
+
+/* Count-up stat cards */
+.stat-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Architecture flow */
+.arch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.arch-node {
+  flex: 1 1 140px;
+  position: relative;
+}
+
+.arch-node:not(:last-child)::after {
+  content: "->";
+  position: absolute;
+  right: -0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: theme("fontFamily.mono", monospace);
+  font-size: 0.75rem;
+  color: hsl(var(--muted));
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .arch-node:not(:last-child)::after {
+    content: "v";
+    right: 50%;
+    top: auto;
+    bottom: -0.75rem;
+    transform: translateX(50%);
+  }
+}
+
+/* Command palette */
+#cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+#cmdk-overlay.open {
+  display: flex;
+}
+
+.cmdk-panel {
+  width: min(90vw, 520px);
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.cmdk-item[aria-selected="true"] {
+  background: rgba(34, 211, 238, 0.12);
+}
+
+/* Light theme */
+html.light {
+  --bg: 210 40% 97%;
+  --card: 0 0% 100%;
+  --muted: 220 12% 40%;
+  --text: 222 30% 12%;
+  --border: 220 16% 85%;
+  --accent: 191 90% 38%;
+  color-scheme: light;
+}
+
+html.light .grain {
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+}
+
+html.light .bg-black\/20,
+html.light .bg-black\/30,
+html.light .bg-black\/40 {
+  background-color: hsl(210 30% 96%) !important;
+}
+
+html.light .border-white\/10,
+html.light .border-white\/20 {
+  border-color: hsl(var(--border)) !important;
+}
+
+html.light .bg-white\/5,
+html.light .bg-white\/10 {
+  background-color: hsl(210 25% 93%) !important;
+}
+
+html.light .text-white\/90 {
+  color: hsl(var(--text)) !important;
+}
+
+html.light .text-white\/20 {
+  color: hsl(220 15% 75%) !important;
+}
+
+html.light .hero-title {
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  color: hsl(var(--text));
+  -webkit-text-fill-color: hsl(var(--text));
+}
+
+html.light .kbd {
+  background: hsl(210 25% 93%);
+}
+
+/* Reduced motion: disable decorative motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  .spotlight-card {
+    transform: none !important;
+    transition: none;
+  }
+  .magnetic-btn {
+    transform: none !important;
+  }
+  #scroll-progress {
+    transition: none;
+  }
+}
+
+/* Print: clean one-page-ish resume */
+@media print {
+  #scroll-progress,
+  #cmdk-overlay,
+  nav.sticky,
+  .grain,
+  .magnetic-btn,
+  #theme-toggle {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .card,
+  .spotlight-card,
+  [class*="bg-black/"],
+  [class*="bg-white/"] {
+    background: #fff !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  details {
+    open: true;
+  }
+  details > ul {
+    display: grid !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+}

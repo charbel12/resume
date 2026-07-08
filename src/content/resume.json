@@ -4,11 +4,21 @@
     "label": "Software Engineer",
     "location": "Mrouj - Maten",
     "phone": "+961 71 04 76 45",
-    "email": "charbel.el.haber@gmail.com"
+    "email": "charbel.el.haber@gmail.com",
+    "socials": {
+      "github": "https://github.com/charbel12",
+      "linkedin": "https://www.linkedin.com/in/charbel-haber"
+    }
   },
   "summary": [
     "Full-stack software engineer focused on real-time systems and reliable backend services.",
     "Hands-on with embedded/cloud integrations, WebSockets, deployments, and data-driven features."
+  ],
+  "stats": [
+    { "label": "Years building software", "value": 4, "suffix": "+" },
+    { "label": "Edge CPU after rewrite", "value": 1, "suffix": "%" },
+    { "label": "Realtime protocols", "value": 4, "suffix": "" },
+    { "label": "Languages spoken", "value": 3, "suffix": "" }
   ],
   "skills": {
     "frontend": ["React", "TypeScript", "Tailwind CSS"],
@@ -32,6 +42,10 @@
       "start": "2022-12",
       "end": null,
       "tags": ["Realtime", "Embedded", "Web", "DevOps", "ML"],
+      "metrics": [
+        { "label": "Edge CPU usage", "value": "~30% -> ~1%" },
+        { "label": "Protocols integrated", "value": "MQTT, WebSocket, DH485, CAN" }
+      ],
       "highlights": [
         "Designed and implemented real-time WebSocket servers/clients for cloud-to-device communication and reliable data synchronization across hardware integrations (Raspberry Pi, Micrologix, Protonode).",
         "Integrated elevator control systems: hall calls, car operations, state tracking, and CAN communication protocols.",
@@ -51,6 +65,10 @@
       "start": "2022-01",
       "end": "2022-11",
       "tags": ["Web", "DevOps", "Embedded"],
+      "metrics": [
+        { "label": "Platforms maintained", "value": "Moodle + WordPress" },
+        { "label": "Deployment target", "value": "Raspberry Pi fleet" }
+      ],
       "highlights": [
         "Managed Moodle server deployments on Raspberry Pi devices to host the Lebanese curriculum efficiently.",
         "Maintained and updated Moodle courses for smooth access and performance.",
@@ -67,6 +85,10 @@
       "start": "2021-10",
       "end": "2021-12",
       "tags": ["Web", "Backend"],
+      "metrics": [
+        { "label": "Focus", "value": "REST-driven UIs" },
+        { "label": "Exposure", "value": "Node.js, Django, Laravel" }
+      ],
       "highlights": [
         "Built frontend pages based on REST API calls using HTML/CSS/JavaScript.",
         "Coordinated with a senior developer to deliver features and fixes.",
@@ -79,9 +101,16 @@
       "title": "Cloud Elevator Telemetry Pipeline",
       "subtitle": "Beytek SAL Offshore",
       "timeframe": "2023 - Present",
+      "featured": true,
       "description": "Rebuilt the monitoring project from a monolithic Laravel app to a modern React + TypeScript frontend, powered by a real-time cloud telemetry pipeline.",
       "tags": ["React", "FastAPI", "WebSockets", "MQTT"],
       "techStack": ["React", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "Mosquitto", "MQTT", "WebSocket"],
+      "architecture": [
+        { "node": "Raspberry Pi", "detail": "DH485 <-> SLC, optimized reads" },
+        { "node": "MQTT / Mosquitto", "detail": "Telemetry transport" },
+        { "node": "FastAPI", "detail": "Ingest + WebSocket server" },
+        { "node": "React + TS", "detail": "Live monitoring UI" }
+      ],
       "highlights": [
         "Migrated the frontend to React + TypeScript and rebuilt monitoring UI components around real-time data streams.",
         "Implemented cloud telemetry transfer from hardware to the server using MQTT, and live backend-to-frontend updates using WebSockets."
@@ -152,6 +181,14 @@
     {
       "title": "AI & Prompt Engineering - AUB AI-Assisted Coding - SU25-26",
       "status": "Currently taking"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "AI-Assisted Coding & Prompt Engineering",
+      "issuer": "American University of Beirut (AUB)",
+      "date": "2025 - 2026",
+      "status": "In progress"
     }
   ],
   "hobbies": ["Reading", "Gym", "Gaming"]
