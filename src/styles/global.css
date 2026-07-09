@@ -174,6 +174,31 @@ html.light .timeline-dot {
   box-shadow: 0 0 0 3px hsl(199 89% 48% / 0.15) !important;
 }
 
+.experience-timeline::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 7px;
+  width: 1px;
+  background: hsl(var(--border));
+  z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .experience-timeline::before {
+    left: 15px;
+  }
+}
+
+html:not(.light) .experience-timeline::before {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.timeline-dot {
+  position: relative;
+  z-index: 1;
+}
+
 /* Spotlight & Tilt Effects */
 .tilt-inner {
   transform: none;

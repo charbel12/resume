@@ -43,8 +43,8 @@
       "end": null,
       "tags": ["Realtime", "Embedded", "Web", "DevOps", "ML"],
       "metrics": [
-        { "label": "Edge CPU usage", "value": "~30% -> ~1%" },
-        { "label": "Protocols integrated", "value": "MQTT, WebSocket, DH485, CAN" }
+        { "label": "Stacked Technologies", "value": "React, TypeScript, Tailwind CSS, Node.js, Laravel, Django, Sequelize, MySQL, Python, Docker, GitHub Actions" },
+        { "label": "Protocols integrated", "value": "HTTP, MQTT, WebSocket, DH485, CAN, OOP" }
       ],
       "highlights": [
         "Designed and implemented real-time WebSocket servers/clients for cloud-to-device communication and reliable data synchronization across hardware integrations (Raspberry Pi, Micrologix, Protonode).",
